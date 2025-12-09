@@ -1,65 +1,122 @@
-import Image from "next/image";
+'use client';
+
+import { motion } from 'framer-motion';
+import { Zap, Palette, Filter, Moon, Smartphone, Sparkles } from 'lucide-react';
+import HeroSection from './components/HeroSection';
+import FeatureCard from './components/FeatureCard';
+import AppScreenshots from './components/AppScreenshots';
+import DownloadButton from './components/DownloadButton';
+import Link from 'next/link';
+
+const features = [
+  {
+    icon: Zap,
+    title: 'Lightning Fast',
+    description: 'Generate high-quality prompts instantly with our optimized engine.',
+  },
+  {
+    icon: Sparkles,
+    title: 'High-Quality Prompts',
+    description: 'Curated collection of prompts that produce stunning AI images.',
+  },
+  {
+    icon: Moon,
+    title: 'Dark/Light Mode',
+    description: 'Seamlessly switch between themes for comfortable viewing.',
+  },
+  {
+    icon: Filter,
+    title: 'Model Filters',
+    description: 'Filter prompts by AI model: OpenAI, Google, Meta, and more.',
+  },
+  {
+    icon: Palette,
+    title: 'Beautiful UI',
+    description: 'Clean, modern interface with smooth animations and glassmorphism.',
+  },
+  {
+    icon: Smartphone,
+    title: 'Mobile First',
+    description: 'Designed for mobile devices with responsive layouts.',
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <>
+      {/* Hero Section */}
+      <HeroSection />
+
+      {/* Features Preview Section */}
+      <section className="py-20 relative">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+              Why Choose <span className="gradient-text">PromptBoard</span>?
+            </h2>
+            <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+              Everything you need to create stunning AI-generated images, all in one place.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((feature, index) => (
+              <FeatureCard
+                key={feature.title}
+                icon={feature.icon}
+                title={feature.title}
+                description={feature.description}
+                delay={index * 0.1}
+              />
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* App Screenshots */}
+      <AppScreenshots />
+
+      {/* CTA Section */}
+      <section className="py-20 relative overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 via-emerald-500/10 to-teal-500/10" />
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-green-500/20 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl" />
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+              Ready to Create <span className="gradient-text">Stunning Images</span>?
+            </h2>
+            <p className="text-lg text-foreground/70 mb-8 max-w-xl mx-auto">
+              Download PromptBoard now and unlock a world of creative possibilities with AI-powered prompts.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <DownloadButton size="large" />
+              <Link
+                href="/gallery"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass-card hover:neon-glow transition-all duration-300 font-medium"
+              >
+                Browse Gallery
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </>
   );
 }
