@@ -8,21 +8,6 @@ export default function AppScreenshots() {
     const { theme } = useTheme();
     const isDark = theme === 'dark';
 
-    // Screenshots based on current theme
-    // Dark mode: screen3 (dark home), screen2 (dark detail), screen4 (dark detail deer)
-    // Light mode: screen1 (light home) for all
-    const screenshots = isDark
-        ? [
-            { src: '/screenshots/screen4.png', alt: 'PromptBoard Dark Detail' },
-            { src: '/screenshots/screen3.png', alt: 'PromptBoard Dark Home' },
-            { src: '/screenshots/screen2.png', alt: 'PromptBoard Dark Detail' },
-        ]
-        : [
-            { src: '/screenshots/screen1.png', alt: 'PromptBoard Light Mode' },
-            { src: '/screenshots/screen1.png', alt: 'PromptBoard Light Home' },
-            { src: '/screenshots/screen1.png', alt: 'PromptBoard Light Detail' },
-        ];
-
     const frameColor = isDark ? 'bg-gray-800' : 'bg-gray-200';
 
     return (
@@ -49,39 +34,101 @@ export default function AppScreenshots() {
                 {/* Mobile: Horizontal Scroll */}
                 <div className="md:hidden">
                     <div className="flex gap-4 overflow-x-auto pb-6 px-4 -mx-4 snap-x snap-mandatory scrollbar-hide">
-                        {screenshots.map((screen, index) => (
-                            <motion.div
-                                key={`${screen.alt}-${index}`}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                viewport={{ once: true }}
-                                className="flex-shrink-0 snap-center"
-                            >
-                                <div className={`relative w-48 aspect-[9/19] rounded-[1.5rem] ${frameColor} p-1 shadow-xl transition-colors duration-500`}>
-                                    <div className="w-full h-full rounded-[1.25rem] overflow-hidden relative">
-                                        <AnimatePresence mode="wait">
-                                            <motion.div
-                                                key={screen.src}
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                exit={{ opacity: 0 }}
-                                                transition={{ duration: 0.3 }}
-                                                className="absolute inset-0"
-                                            >
-                                                <Image
-                                                    src={screen.src}
-                                                    alt={screen.alt}
-                                                    fill
-                                                    className="object-cover object-top"
-                                                    sizes="50vw"
-                                                />
-                                            </motion.div>
-                                        </AnimatePresence>
-                                    </div>
+                        {/* Mobile Left */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5 }}
+                            viewport={{ once: true }}
+                            className="flex-shrink-0 snap-center"
+                        >
+                            <div className={`relative w-48 aspect-[9/19] rounded-[1.5rem] ${frameColor} p-1 shadow-xl transition-colors duration-500`}>
+                                <div className="w-full h-full rounded-[1.25rem] overflow-hidden relative">
+                                    <AnimatePresence mode="wait">
+                                        <motion.div
+                                            key={isDark ? 'dark-4' : 'light-1'}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="absolute inset-0"
+                                        >
+                                            <Image
+                                                src={isDark ? '/screenshots/screen4.png' : '/screenshots/screen1.png'}
+                                                alt="PromptBoard Screenshot"
+                                                fill
+                                                className="object-cover object-top"
+                                                sizes="50vw"
+                                            />
+                                        </motion.div>
+                                    </AnimatePresence>
                                 </div>
-                            </motion.div>
-                        ))}
+                            </div>
+                        </motion.div>
+
+                        {/* Mobile Center */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.1 }}
+                            viewport={{ once: true }}
+                            className="flex-shrink-0 snap-center"
+                        >
+                            <div className={`relative w-48 aspect-[9/19] rounded-[1.5rem] ${frameColor} p-1 shadow-xl transition-colors duration-500`}>
+                                <div className="w-full h-full rounded-[1.25rem] overflow-hidden relative">
+                                    <AnimatePresence mode="wait">
+                                        <motion.div
+                                            key={isDark ? 'dark-3' : 'light-1-center'}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="absolute inset-0"
+                                        >
+                                            <Image
+                                                src={isDark ? '/screenshots/screen3.png' : '/screenshots/screen1.png'}
+                                                alt="PromptBoard Screenshot"
+                                                fill
+                                                className="object-cover object-top"
+                                                sizes="50vw"
+                                            />
+                                        </motion.div>
+                                    </AnimatePresence>
+                                </div>
+                            </div>
+                        </motion.div>
+
+                        {/* Mobile Right */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.2 }}
+                            viewport={{ once: true }}
+                            className="flex-shrink-0 snap-center"
+                        >
+                            <div className={`relative w-48 aspect-[9/19] rounded-[1.5rem] ${frameColor} p-1 shadow-xl transition-colors duration-500`}>
+                                <div className="w-full h-full rounded-[1.25rem] overflow-hidden relative">
+                                    <AnimatePresence mode="wait">
+                                        <motion.div
+                                            key={isDark ? 'dark-2' : 'light-1-right'}
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0 }}
+                                            transition={{ duration: 0.3 }}
+                                            className="absolute inset-0"
+                                        >
+                                            <Image
+                                                src={isDark ? '/screenshots/screen2.png' : '/screenshots/screen1.png'}
+                                                alt="PromptBoard Screenshot"
+                                                fill
+                                                className="object-cover object-top"
+                                                sizes="50vw"
+                                            />
+                                        </motion.div>
+                                    </AnimatePresence>
+                                </div>
+                            </div>
+                        </motion.div>
                     </div>
                     <p className="text-center text-sm text-foreground/50 mt-2">← Swipe to see more →</p>
                 </div>
@@ -89,7 +136,7 @@ export default function AppScreenshots() {
                 {/* Desktop: 3D Layout */}
                 <div className="hidden md:block relative h-[650px]">
                     <div className="relative flex items-center justify-center h-full">
-                        {/* Left Phone */}
+                        {/* Left Phone - Detail View */}
                         <motion.div
                             initial={{ opacity: 0, x: -100, rotateY: 20 }}
                             whileInView={{ opacity: 1, x: 0, rotateY: 15 }}
@@ -101,7 +148,7 @@ export default function AppScreenshots() {
                                 <div className="w-full h-full rounded-[1.25rem] overflow-hidden relative">
                                     <AnimatePresence mode="wait">
                                         <motion.div
-                                            key={screenshots[0].src}
+                                            key={isDark ? 'desktop-dark-4' : 'desktop-light-1'}
                                             initial={{ opacity: 0, scale: 1.1 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             exit={{ opacity: 0, scale: 0.9 }}
@@ -109,10 +156,10 @@ export default function AppScreenshots() {
                                             className="absolute inset-0"
                                         >
                                             <Image
-                                                src={screenshots[0].src}
-                                                alt={screenshots[0].alt}
+                                                src={isDark ? '/screenshots/screen4.png' : '/screenshots/screen1.png'}
+                                                alt={isDark ? 'PromptBoard Dark Detail' : 'PromptBoard Light Mode'}
                                                 fill
-                                                className="object-cover object-top"
+                                                className={`object-cover ${isDark ? 'object-top' : 'object-center'}`}
                                                 sizes="25vw"
                                             />
                                         </motion.div>
@@ -121,7 +168,7 @@ export default function AppScreenshots() {
                             </div>
                         </motion.div>
 
-                        {/* Center Phone (Main) */}
+                        {/* Center Phone (Main) - Home View */}
                         <motion.div
                             initial={{ opacity: 0, y: 50 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -133,7 +180,7 @@ export default function AppScreenshots() {
                                 <div className="w-full h-full rounded-[1.5rem] overflow-hidden relative">
                                     <AnimatePresence mode="wait">
                                         <motion.div
-                                            key={screenshots[1].src}
+                                            key={isDark ? 'desktop-dark-3' : 'desktop-light-1-center'}
                                             initial={{ opacity: 0, scale: 1.1 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             exit={{ opacity: 0, scale: 0.9 }}
@@ -141,8 +188,8 @@ export default function AppScreenshots() {
                                             className="absolute inset-0"
                                         >
                                             <Image
-                                                src={screenshots[1].src}
-                                                alt={screenshots[1].alt}
+                                                src={isDark ? '/screenshots/screen3.png' : '/screenshots/screen1.png'}
+                                                alt={isDark ? 'PromptBoard Dark Home' : 'PromptBoard Light Home'}
                                                 fill
                                                 className="object-cover object-top"
                                                 sizes="33vw"
@@ -153,7 +200,7 @@ export default function AppScreenshots() {
                             </div>
                         </motion.div>
 
-                        {/* Right Phone */}
+                        {/* Right Phone - Detail View */}
                         <motion.div
                             initial={{ opacity: 0, x: 100, rotateY: -20 }}
                             whileInView={{ opacity: 1, x: 0, rotateY: -15 }}
@@ -165,7 +212,7 @@ export default function AppScreenshots() {
                                 <div className="w-full h-full rounded-[1.25rem] overflow-hidden relative">
                                     <AnimatePresence mode="wait">
                                         <motion.div
-                                            key={screenshots[2].src}
+                                            key={isDark ? 'desktop-dark-2' : 'desktop-light-1-right'}
                                             initial={{ opacity: 0, scale: 1.1 }}
                                             animate={{ opacity: 1, scale: 1 }}
                                             exit={{ opacity: 0, scale: 0.9 }}
@@ -173,10 +220,10 @@ export default function AppScreenshots() {
                                             className="absolute inset-0"
                                         >
                                             <Image
-                                                src={screenshots[2].src}
-                                                alt={screenshots[2].alt}
+                                                src={isDark ? '/screenshots/screen2.png' : '/screenshots/screen1.png'}
+                                                alt={isDark ? 'PromptBoard Dark Detail' : 'PromptBoard Light Mode'}
                                                 fill
-                                                className="object-cover object-top"
+                                                className={`object-cover ${isDark ? 'object-top' : 'object-bottom'}`}
                                                 sizes="25vw"
                                             />
                                         </motion.div>
